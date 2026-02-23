@@ -52,8 +52,8 @@ function App() {
             <CommentsList comments={comments} isLoading={isLoading} />
             <hr />
             <h3>Skomentuj:</h3>
-            <OldForm />
-            {/* <NewForm /> */}
+            {/* <OldForm /> */}
+            <NewForm />
         </div>
     );
 }
