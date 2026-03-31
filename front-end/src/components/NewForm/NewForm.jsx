@@ -10,9 +10,24 @@ function SubmitButton () {
             </button>
         )}
 
-export function NewForm() {
-    const {action, method, data, pending} = useFormStatus();
 
+function FormField() {
+    const {pending} = useFormStatus();
+    return (
+        <>
+        <label>
+                <p>Imię:</p>
+                <input type="text" name="name" disabled={pending}/>
+            </label>
+            <label>
+                <p>Treść komentarza:</p>
+                <textarea className={styles.textarea} name="comment" disabled={pending}/>
+        </label>
+        </>
+    )
+}
+
+export function NewForm() {
 
 
     const BACK_END_URL = "http://localhost:3000";
@@ -29,9 +44,6 @@ export function NewForm() {
             body: JSON.stringify({ 
                 name: formData.get("name"), 
                 comment: formData.get("comment") })
-        }).then(() => {
-            formData.set("name", "");
-            formData.set("comment", "");
         })
         )}
 
@@ -39,15 +51,7 @@ export function NewForm() {
     return (
         <form className={styles.form} action={handleSubmit}>
             {error && <p className={styles.error}>Wystąpił błąd: {error.message}</p>}
-            <label>
-                <p>Imię:</p>
-                <input type="text" name="name" />
-            </label>
-            <label>
-                <p>Treść komentarza:</p>
-                <textarea className={styles.textarea} name="comment" />
-            </label>
-
+            <FormField />
             <SubmitButton />
         </form>
     );
